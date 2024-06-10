@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galery;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class GaleryController extends Controller
 {
@@ -30,8 +32,9 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        $type_menu = 'Galeri';
-        return view('pages.galery.galery-create', compact('type_menu'));
+        $type_menu  = 'Galeri';
+        $projects   = Project::all();
+        return view('pages.galery.galery-create', compact('type_menu', 'projects'));
     }
 
     /**
@@ -39,38 +42,37 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $request->validate([
+            'projectId' => 'required',
+            'filepond' => 'required',
+            'filepond.*' => 'mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $files      = $request->file('filepond');
+        $paths      = [];
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        foreach ($files as $file) {
+            $path = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move('img/galery/', $path);
+            $paths[] = $path;
+            Galery::create([
+                'project_id' => $request->projectId,
+                'image' => $path
+            ]);
+        }
+
+        return Redirect::route('galery.index')->with('success', 'Image has been successfully uploaded');
+
+        // return response()->json(['paths' => $paths], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Galery $galery)
     {
-        //
+        $galery->delete();
+        return Redirect::route('galery.index')->with('success', 'Image has been successfully deleted');
     }
 }
