@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\AboutUs;
 use App\Models\Galery;
 use App\Models\Project;
+use App\Models\Survei;
+use App\Models\Testimoni;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -75,6 +77,27 @@ class DatabaseSeeder extends Seeder
         Galery::create([
             'project_id' => 1,
             'image' => 'test.jpg'
+        ]);
+
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+
+        Survei::create([
+            'name' => fake()->name(),
+            'projectName' => 'Rumah Idaman ' . fake()->safeColorName(),
+            'email' => fake()->safeEmail(),
+            'phone' => fake()->phoneNumber(),
+            'city' => fake()->city(),
+            'address' => fake()->address(),
+            'surveiDate' => fake()->date('Y-m-d'),
+            'surveiTime' => '09:00 - Selesai',
+            'designType' => 'Interior',
+            'cost' => 400000,
+            'status' => 'Paid',
+            'paymentReceipt' => 'avatar-1.png'
         ]);
     }
 }

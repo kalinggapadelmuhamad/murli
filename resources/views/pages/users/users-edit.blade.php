@@ -127,9 +127,7 @@
                                                     <label>
                                                         Address
                                                     </label>
-                                                    <textarea class="form-control text-left @error('address') is-invalid @enderror" data-height="150" name="address">
-                                                        {{ $user->address }}
-                                                    </textarea>
+                                                    <textarea class="form-control text-left @error('address') is-invalid @enderror" data-height="150" name="address">{{ $user->address }}</textarea>
                                                     @error('address')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}

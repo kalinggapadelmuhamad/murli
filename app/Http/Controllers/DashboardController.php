@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Testimoni;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class DashboardController extends Controller
     {
         $users = User::all();
         $projects = Project::all();
+        $testimonis = Testimoni::all();
         $type_menu = 'Home';
-        return view('pages.home.home-index', compact('type_menu', 'users', 'projects'));
+        return view('pages.home.home-index', compact('type_menu', 'users', 'projects', 'testimonis'));
     }
 }

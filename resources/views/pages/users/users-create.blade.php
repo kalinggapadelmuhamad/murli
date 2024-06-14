@@ -133,8 +133,7 @@
                                                     <label>
                                                         Address
                                                     </label>
-                                                    <textarea class="form-control @error('address') is-invalid @enderror" data-height="150" name="address">
-                                                    </textarea>
+                                                    <textarea class="form-control @error('address') is-invalid @enderror" data-height="150" name="address"></textarea>
                                                     @error('address')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
