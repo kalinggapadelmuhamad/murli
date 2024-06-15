@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pemesanan;
 use App\Models\Project;
 use App\Models\Testimoni;
 use App\Models\User;
@@ -17,7 +18,8 @@ class DashboardController extends Controller
         $users = User::all();
         $projects = Project::all();
         $testimonis = Testimoni::all();
+        $pemesanans = Pemesanan::all();
         $type_menu = 'Home';
-        return view('pages.home.home-index', compact('type_menu', 'users', 'projects', 'testimonis'));
+        return view('pages.home.home-index', compact('type_menu', 'users', 'projects', 'testimonis', 'pemesanans'));
     }
 }

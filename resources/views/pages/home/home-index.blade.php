@@ -70,7 +70,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <a href="{{ route('home.index') }}">
+                    <a href="{{ route('pemesanan.index') }}">
                         <div class="card card-statistic-1">
                             <div class="card-icon bg-danger">
                                 <i class="fas fa-clock-rotate-left"></i>
@@ -80,7 +80,7 @@
                                     <h4>History</h4>
                                 </div>
                                 <div class="card-body">
-                                    {{-- {{ $likes->count() }} --}}
+                                    {{ $pemesanans->count() }}
                                 </div>
                             </div>
                         </div>

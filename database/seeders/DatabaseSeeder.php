@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AboutUs;
 use App\Models\Galery;
+use App\Models\Pemesanan;
 use App\Models\Project;
 use App\Models\Survei;
 use App\Models\Testimoni;
@@ -95,6 +96,19 @@ class DatabaseSeeder extends Seeder
             'surveiDate' => fake()->date('Y-m-d'),
             'surveiTime' => '09:00 - Selesai',
             'designType' => 'Interior',
+            'cost' => 400000,
+            'status' => 'Paid',
+            'paymentReceipt' => 'avatar-1.png'
+        ]);
+
+        Pemesanan::create([
+            'name' => fake()->name(),
+            'projectName' => 'Rumah Idaman ' . fake()->safeColorName(),
+            'email' => fake()->safeEmail(),
+            'phone' => fake()->phoneNumber(),
+            'jumlah_tingkat' => fake()->numberBetween(1, 5),
+            'luas_bangunan' => fake()->numberBetween(1, 10),
+            'designType' => 'Paket A',
             'cost' => 400000,
             'status' => 'Paid',
             'paymentReceipt' => 'avatar-1.png'

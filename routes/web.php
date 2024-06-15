@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GaleryController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SurveiController;
@@ -23,4 +24,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('galery', GaleryController::class);
     Route::resource('testimoni', TestimoniController::class);
     Route::resource('survei', SurveiController::class);
+    Route::resource('pemesanan', PemesananController::class);
 });

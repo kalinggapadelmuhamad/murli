@@ -38,8 +38,8 @@
                     <li class="{{ Request::is('survei') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('survei.index') }}">Survei</a>
                     </li>
-                    <li class="{{ Request::is('layout-top-navigation') ? 'active' : '' }}">
-                        <a class="nav-link" href="components-article.html">Pemesanan</a>
+                    <li class="{{ Request::is('pemesanan') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('pemesanan.index') }}">Pemesanan</a>
                     </li>
                 </ul>
             </li>

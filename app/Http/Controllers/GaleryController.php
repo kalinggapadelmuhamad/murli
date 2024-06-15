@@ -49,6 +49,7 @@ class GaleryController extends Controller
             'filepond.*' => 'mimes:jpg,jpeg,png,bmp|max:20000'
         ]);
 
+
         $files      = $request->file('filepond');
         $paths      = [];
 

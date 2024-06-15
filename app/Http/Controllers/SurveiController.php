@@ -123,7 +123,7 @@ class SurveiController extends Controller
 
         list($cost, $city) = explode('|', $request->city, 2);
 
-        Survei::create([
+        $survei = Survei::create([
             "name" => $request->name,
             "projectName" => $request->project,
             "email" => $request->email,
@@ -137,7 +137,7 @@ class SurveiController extends Controller
             'status' => 'Unpaid',
         ]);
 
-        return Redirect::route('survei.index')->with('success', 'Customer Survei has been successfully created');
+        return Redirect::route('survei.edit', $survei);
     }
 
     /**
@@ -223,16 +223,52 @@ class SurveiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Survei $survei)
     {
-        //
+
+        $request->validate([
+            "name" => 'required',
+            "email" => 'required',
+            "phone" => 'required',
+            "city" => 'required',
+            "date" => 'required',
+            "time" => 'required',
+            "project" => 'required',
+            "type" => 'required',
+            "address" => 'required',
+            "file" => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
+
+        list($cost, $city) = explode('|', $request->city, 2);
+
+        $files      = $request->file('file');
+        $path = uniqid() . '.' . $files->getClientOriginalExtension();
+        $files->move('img/payment/survei/', $path);
+
+        $survei->update([
+            "name" => $request->name,
+            "projectName" => $request->project,
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "city" => $city,
+            "address" => $request->address,
+            "surveiDate" => $request->date,
+            "surveiTime" => $request->time,
+            "designType" => $request->type,
+            'cost' => $cost,
+            'status' => 'Paid',
+            'paymentReceipt' => $path
+        ]);
+
+        return Redirect::route('survei.index')->with('success', 'Customer Survei has been successfully Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Survei $survei)
     {
-        //
+        $survei->delete();
+        return Redirect::route('survei.index')->with('success', 'Customer Survei has been successfully Deleted');
     }
 }

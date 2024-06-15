@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Testimoni')
+@section('title', 'Pemesanan')
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/chocolat/dist/css/chocolat.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
 @endpush
 
 @section('main')
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Testimoni</h1>
+                <h1>Pemesanan</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ route('home.index') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item">Testimoni</div>
+                    <div class="breadcrumb-item">Pemesanan</div>
                 </div>
             </div>
             <div class="section-body">
@@ -29,9 +29,9 @@
                             <div class="card-body">
                                 <div class="p-2">
                                     <div class="float-left">
-                                        {{-- <div class="section-header-button">
-                                            <a href="{{ route('galery.create') }}" class="btn btn-danger">Create New</a>
-                                        </div> --}}
+                                        <div class="section-header-button">
+                                            <a href="{{ route('pemesanan.create') }}" class="btn btn-danger">Create New</a>
+                                        </div>
                                     </div>
                                     <div class="float-right">
                                         <form action="" method="GET">
@@ -51,33 +51,67 @@
                                         <tr>
                                             <th style="width: 3%">No</th>
                                             <th>Name</th>
-                                            <th>Comment</th>
-                                            <th>Rating</th>
-                                            <th>Created At</th>
+                                            <th>Project</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Jumlah Tingkat</th>
+                                            <th>Luas Bangunan</th>
+                                            <th>Type</th>
+                                            <th>Cost</th>
+                                            <th>Create At</th>
+                                            <th>Status</th>
+                                            {{-- <th>Created At</th> --}}
                                             <th style="width: 5%" class="text-center">Action</th>
                                         </tr>
-                                        @foreach ($testimonis as $index => $testimoni)
+                                        @foreach ($pemesanans as $index => $pemesanan)
                                             <tr>
                                                 <td>
-                                                    {{ $testimonis->firstItem() + $index }}
+                                                    {{ $pemesanans->firstItem() + $index }}
                                                 </td>
                                                 <td>
-                                                    {{ $testimoni->user->name }}
+                                                    {{ $pemesanan->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $testimoni->comment }}
+                                                    {{ $pemesanan->projectName }}
                                                 </td>
                                                 <td>
-                                                    @for ($i = 1; $i <= $testimoni->rating; $i++)
-                                                        <i class="fa-solid fa-star text-warning"></i>
-                                                    @endfor
+                                                    {{ $pemesanan->email }}
                                                 </td>
                                                 <td>
-                                                    {{ $testimoni->created_at->format('d-F-Y') }}
+                                                    {{ $pemesanan->phone }}
+                                                </td>
+                                                <td>
+                                                    {{ $pemesanan->jumlah_tingkat }} Lantai
+                                                </td>
+                                                <td>
+                                                    {{ $pemesanan->luas_bangunan }} m2
+                                                </td>
+                                                <td>
+                                                    {{ $pemesanan->designType }}
+                                                </td>
+                                                <td>
+                                                    Rp.{{ number_format($pemesanan->cost) }}
+                                                </td>
+                                                <td>
+                                                    @if ($pemesanan->status == 'Paid')
+                                                        <div class="badge badge-success">
+                                                            <a href="{{ asset('img/payment/pemesanan/' . $pemesanan->paymentReceipt) }}"
+                                                                class="text-white"
+                                                                target="_blank">{{ $pemesanan->status }}</a>
+                                                        </div>
+                                                    @else
+                                                        <div class="badge badge-danger">{{ $pemesanan->status }}</div>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ $pemesanan->created_at->format('d-F-Y') }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <form action="{{ route('testimoni.destroy', $testimoni) }}"
+                                                        <a href="{{ route('pemesanan.edit', $pemesanan) }}"
+                                                            class="btn btn-sm btn-icon btn-primary m-1"><i
+                                                                class="fas fa-eye"></i></a>
+                                                        <form action="{{ route('pemesanan.destroy', $pemesanan) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
@@ -93,12 +127,12 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between">
                                     <span>
-                                        Showing {{ $testimonis->firstItem() }}
-                                        to {{ $testimonis->lastItem() }}
-                                        of {{ $testimonis->total() }} entries
+                                        Showing {{ $pemesanans->firstItem() }}
+                                        to {{ $pemesanans->lastItem() }}
+                                        of {{ $pemesanans->total() }} entries
                                     </span>
                                     <div class="paginate-sm">
-                                        {{ $testimonis->onEachSide(0)->links() }}
+                                        {{ $pemesanans->onEachSide(0)->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -137,58 +171,6 @@
     </script>
 
     <!-- Page Specific JS File -->
-    <script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
-    <script>
-        $(".gallery .gallery-item").each(function() {
-            var me = $(this);
-
-            me.attr('href', me.data('image'));
-            me.attr('title', me.data('title'));
-            if (me.parent().hasClass('gallery-fw')) {
-                me.css({
-                    height: me.parent().data('item-height'),
-                });
-                me.find('div').css({
-                    lineHeight: me.parent().data('item-height') + 'px'
-                });
-            }
-            me.css({
-                backgroundImage: 'url("' + me.data('image') + '")'
-            });
-        });
-        if (jQuery().Chocolat) {
-            $(".gallery").Chocolat({
-                className: 'gallery',
-                imageSelector: '.gallery-item',
-            });
-        }
-
-        // Background
-        $("[data-background]").each(function() {
-            var me = $(this);
-            me.css({
-                backgroundImage: 'url(' + me.data('background') + ')'
-            });
-        });
-
-        // Custom Tab
-        $("[data-tab]").each(function() {
-            var me = $(this);
-
-            me.click(function() {
-                if (!me.hasClass('active')) {
-                    var tab_group = $('[data-tab-group="' + me.data('tab') + '"]'),
-                        tab_group_active = $('[data-tab-group="' + me.data('tab') + '"].active'),
-                        target = $(me.attr('href')),
-                        links = $('[data-tab="' + me.data('tab') + '"]');
-
-                    links.removeClass('active');
-                    me.addClass('active');
-                    target.addClass('active');
-                    tab_group_active.removeClass('active');
-                }
-                return false;
-            });
-        });
-    </script>
+    <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('js/page/features-posts.js') }}"></script>
 @endpush
