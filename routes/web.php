@@ -20,6 +20,7 @@ Route::prefix('pricing')->group(function () {
     Route::get('pemesanan', [BerandaController::class, 'indexPemesanan'])->name('pemesanans.index');
     Route::post('pemesanan/store', [BerandaController::class, 'storePemesanan'])->name('storePemesanan.index');
     Route::get('pemesanan/detail/{pemesanan}', [BerandaController::class, 'finishPemesanan'])->name('finishPemesanan.index');
+    Route::put('pemesanan/detail/{pemesanan}', [BerandaController::class, 'finishPemesananStore'])->name('finishPemesananStore.index');
 });
 
 

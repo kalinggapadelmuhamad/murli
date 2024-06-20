@@ -88,4 +88,22 @@ class BerandaController extends Controller
         $type_menu = 'Pricing';
         return view('pages.beranda.pricing-finish', compact('type_menu', 'pemesanan'));
     }
+
+    public function finishPemesananStore(Pemesanan $pemesanan, Request $request)
+    {
+        $request->validate([
+            "file" => 'required'
+        ]);
+
+        $files      = $request->file('file');
+        $path = uniqid() . '.' . $files->getClientOriginalExtension();
+        $files->move('img/payment/pemesanan/', $path);
+
+        $pemesanan->update([
+            'status' => 'Paid',
+            'paymentReceipt' => $path
+        ]);
+
+        return Redirect::route('finishPemesanan.index', $pemesanan);
+    }
 }
