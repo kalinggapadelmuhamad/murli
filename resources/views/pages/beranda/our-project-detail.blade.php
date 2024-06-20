@@ -13,8 +13,8 @@
             <div class="row">
                 <div class="col-md-7 p-0 p-md-3 order-lg-2">
                     <div class="gallery gallery-fw">
-                        <div class="gallery-item" data-image="{{ asset('img/galery/avatar-1.png') }}" data-title="Image 1"
-                            class="img-fluid"></div>
+                        <div class="gallery-item" data-image="{{ asset('img/galery/' . $projecy->Galery->take(1)) }}"
+                            data-title="Image 1" class="img-fluid"></div>
                     </div>
                 </div>
                 <div class="col-md-5 align-self-center text-md-end p-3">
