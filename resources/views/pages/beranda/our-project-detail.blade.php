@@ -13,7 +13,8 @@
             <div class="row">
                 <div class="col-md-7 p-0 p-md-3 order-lg-2">
                     <div class="gallery gallery-fw">
-                        <div class="gallery-item" data-image="{{ asset('img/galery/' . $projecy->Galery->take(1)) }}"
+                        <div class="gallery-item"
+                            data-image="{{ asset('img/galery/' . $project->Galery->take(1)[0]->image) }}"
                             data-title="Image 1" class="img-fluid"></div>
                     </div>
                 </div>
