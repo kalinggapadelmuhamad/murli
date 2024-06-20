@@ -7,9 +7,20 @@ use App\Models\Project;
 use App\Models\Testimoni;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
+
+    public function __construct()
+    {
+        if (Auth::user()->role != 'Admin') {
+            return Redirect::back();
+        }
+    }
+
+
     /**
      * Display a listing of the resource.
      */

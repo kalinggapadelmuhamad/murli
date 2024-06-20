@@ -164,7 +164,8 @@
                                                 </div>
                                             </div>
                                             @if ($pemesanan->status == 'Unpaid')
-                                                <input type="file" id="files" class="d-none" name="file">
+                                                <input type="file" id="files" class="d-none" name="file"
+                                                    required>
                                                 <label for="files" class="btn btn-danger btn-lg m-2">
                                                     Upload Bukti Pembayaran
                                                 </label>

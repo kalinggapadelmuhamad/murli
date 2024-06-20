@@ -11,7 +11,7 @@ class Project extends Model
 
     protected $guarded = [];
 
-    public function galery()
+    public function Galery()
     {
         return $this->hasMany(Galery::class);
     }

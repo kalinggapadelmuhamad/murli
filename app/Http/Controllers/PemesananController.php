@@ -99,6 +99,7 @@ class PemesananController extends Controller
             "jumlah_tingkat" => 'required',
             "luas_bangunan" => 'required',
             "type" => 'required',
+            "file" => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
         ]);
 
         if ($request->type == 'Paket A') {

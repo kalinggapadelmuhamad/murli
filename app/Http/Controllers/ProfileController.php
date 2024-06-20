@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use GuzzleHttp\Middleware;
 
 class ProfileController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

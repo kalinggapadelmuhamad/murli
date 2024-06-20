@@ -58,27 +58,21 @@ class DatabaseSeeder extends Seeder
             'maps_link' => '',
         ]);
 
-        Project::create([
-            'name' => 'CITRA GRAND SEMARANG',
-            'theme' => 'MODERN CLASSIC',
-            'category' => 'RESIDENTIAL',
-            'description' => fake()->text()
-        ]);
+        for ($i = 1; $i <= 3; $i++) {
+            Project::create([
+                'name' => 'Project Dumies ' . $i,
+                'theme' => 'MODERN CLASSIC ' . $i,
+                'category' => 'RESIDENTIAL ' . $i,
+                'description' => 'Luas ruangan terbatas dapat tetap memenuhi kebutuhan dari penggunanya jika didesain dengan tepat. Penggunaan kabinet kabinet tinggi yang efisien dan penyusunan layout yang baik dapat memaksimalkan efektifitas interior. Penggunaan palet warna yang terang dan netral dapat memberikan kesan luas dan lega. Tambahan warna warna earthy dapat menjadi aksen yang kontras pada interior.'
+            ]);
 
-        Galery::create([
-            'project_id' => 1,
-            'image' => 'avatar-1.png'
-        ]);
-
-        Galery::create([
-            'project_id' => 1,
-            'image' => 'avatar-2.png'
-        ]);
-
-        Galery::create([
-            'project_id' => 1,
-            'image' => 'test.jpg'
-        ]);
+            for ($j = 1; $j <= 18; $j++) {
+                Galery::create([
+                    'project_id' => $i,
+                    'image' => 'avatar-1.png'
+                ]);
+            }
+        }
 
         Testimoni::create([
             'user_id' => 1,
