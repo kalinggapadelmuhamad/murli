@@ -78,17 +78,19 @@
                                     </div>
                                     @if ($pemesanan->status == 'Unpaid')
                                         <input type="file" id="files" class="d-none" name="file" required>
-                                        <label for="files" class="btn btn-danger btn-md mb-2 mb-md-0">
+                                        <label for="files" class="btn btn-dark btn-md mb-2 mb-md-0">
                                             Upload Bukti Pembayaran
                                         </label>
-                                        <button class="btn btn-primary btn-md">
+                                        <button class="btn btn-outline-dark btn-md">
                                             Save Changes
                                         </button>
                                     @else
-                                        <a class="btn btn-danger btn-md">
+                                        <a class="btn btn-dark btn-md no-print" onclick="window.print()">
                                             Download PDF
                                         </a>
-                                        <a class="btn btn-success btn-md">
+                                        <a class="btn
+                                            btn-outline-dark btn-md"
+                                            href="{{ asset('img/payment/pemesanan/' . $pemesanan->paymentReceipt) }}">
                                             {{ $pemesanan->status }}
                                         </a>
                                     @endif

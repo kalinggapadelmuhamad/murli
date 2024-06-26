@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top px-3 px-md-5">
+<nav class="navbar navbar-expand-lg fixed-top px-3 px-md-5 no-print">
     <a class="navbar-brand" href="{{ route('beranda.index') }}">
         <img src="{{ asset('img/logo2.jpg') }}" alt="" class="img-fluid" width="45">
     </a>
@@ -21,11 +21,23 @@
                     href="{{ route('estimasiBiaya.index') }}">Pricing</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Request Survey</a>
+                <a class="nav-link {{ $type_menu == 'Survei' ? 'active' : '' }}"
+                    href="{{ route('surveis.index') }}">Request Survey</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link {{ $type_menu == 'About Us' ? 'active' : '' }}"
+                    href="{{ route('aboutUsIndex.index') }}">About Us</a>
             </li>
+            @if (Auth::check())
+                <li class="nav-item rounded ms-3 text-center" style="background-color: #FF1358">
+                    <a class="nav-link text-white" href="{{ route('home.index') }}">Dashboard</a>
+                </li>
+            @else
+                <li class="nav-item rounded ms-3 text-center" style="background-color: #FF1358">
+                    <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
+                </li>
+            @endif
+
         </ul>
     </div>
 </nav>

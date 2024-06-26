@@ -49,6 +49,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function survei()
+    {
+        return $this->hasMany(Survei::class);
+    }
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class);
+    }
+
     public function testimoni()
     {
         return $this->hasMany(Testimoni::class);

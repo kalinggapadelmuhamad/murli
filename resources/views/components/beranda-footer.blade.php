@@ -1,4 +1,4 @@
-<footer class="kontak">
+<footer class="kontak no-print">
     <div class="container-fluid">
         <div class="row px-1 px-md-5 py-3 py-md-5">
             <div class="col-md-3 d-flex align-items-center justify-content-center mb-3">

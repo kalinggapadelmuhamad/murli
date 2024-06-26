@@ -42,7 +42,7 @@
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="name" class="form-label">Customer Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            id="name" name="name" required>
+                                            id="name" name="name" required value="{{ Auth::user()->name }}">
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -91,7 +91,7 @@
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="email" class="form-label">Customer Email</label>
                                         <input type="email" class="form-control mb-3 @error('email') is-invalid @enderror"
-                                            id="email" name="email" required>
+                                            id="email" name="email" required value="{{ Auth::user()->email }}">
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -100,7 +100,7 @@
 
                                         <label for="phone" class="form-label">Customer Phone</label>
                                         <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                            id="phone" name="phone" required>
+                                            id="phone" name="phone" required value="{{ Auth::user()->phone }}">
                                         @error('phone')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -134,7 +134,7 @@
                                                         <li>Design Exterior (FASAD)</li>
                                                         <li>Lay Out</li>
                                                         <li>
-                                                            <span class="badge text-bg-primary text-wrap">
+                                                            <span class="badge text-bg-dark text-wrap">
                                                                 Design Interior
                                                             </span>
                                                         </li>
@@ -150,14 +150,13 @@
                                                     <ul>
                                                         <li>Design 3D</li>
                                                         <li>Design Exterior (FASAD)</li>
-                                                        <li>Lay Out</li>
                                                         <li>
-                                                            <span class="badge text-bg-primary text-wrap">
+                                                            <span class="badge text-bg-dark text-wrap">
                                                                 Design Interior
                                                             </span>
                                                         </li>
                                                         <li>
-                                                            <span class="badge text-bg-primary text-wrap">
+                                                            <span class="badge text-bg-dark text-wrap">
                                                                 Rancangan Anggaran Biaya (RAB)
                                                             </span>
                                                         </li>
@@ -175,17 +174,17 @@
                                                         <li>Design Exterior (FASAD)</li>
                                                         <li>Lay Out</li>
                                                         <li>
-                                                            <span class="badge text-bg-primary text-wrap">
+                                                            <span class="badge text-bg-dark text-wrap">
                                                                 Design Interior
                                                             </span>
                                                         </li>
                                                         <li>
-                                                            <span class="badge text-bg-primary text-wrap">
+                                                            <span class="badge text-bg-dark text-wrap">
                                                                 Rancangan Anggaran Biaya (RAB)
                                                             </span>
                                                         </li>
                                                         <li>
-                                                            <span class="badge text-bg-primary text-wrap">
+                                                            <span class="badge text-bg-dark text-wrap">
                                                                 Detail Engineering Design (DED)
                                                             </span>
                                                         </li>
@@ -201,7 +200,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-lg m-2">
+                            <button class="btn btn-outline-dark btn-lg m-2">
                                 Pesan Layanan
                             </button>
                         </div>

@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Murliana',
-            'email' => 'Murliana@gmail.com',
+            'name' => 'Owner',
+            'email' => 'Owner@gmail.com',
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'password' => Hash::make('12345678'),
@@ -33,21 +33,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Kalingga Padel Muhamad',
-            'email' => 'enginerbros@gmail.com',
+            'name' => 'Admin',
+            'email' => 'Admin@gmail.com',
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'password' => Hash::make('12345678'),
             'role' => 'Admin'
-        ]);
-
-        User::factory()->create([
-            'name' => fake()->name(),
-            'email' => fake()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
-            'address' => fake()->address(),
-            'password' => Hash::make('12345678'),
-            'role' => 'User'
         ]);
 
         AboutUs::create([
@@ -74,6 +65,42 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
+        Testimoni::create([
+            'user_id' => 1,
+            'rating' => 5,
+            'comment' => fake()->text()
+        ]);
         Testimoni::create([
             'user_id' => 1,
             'rating' => 5,

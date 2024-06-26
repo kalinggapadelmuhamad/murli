@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Survei;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class SurveiController extends Controller
@@ -14,9 +15,13 @@ class SurveiController extends Controller
     public function index(Request $request)
     {
         $type_menu  = 'History';
-        $surveis    = Survei::when($request->name, function ($query, $name) {
-            $query->where('name', 'like', '%' . $name . '%');
-        })->latest()->paginate(10);
+        if (Auth::user()->role != 'User') {
+            $surveis    = Survei::when($request->name, function ($query, $name) {
+                $query->where('name', 'like', '%' . $name . '%');
+            })->latest()->paginate(10);
+        } else {
+            $surveis    = Survei::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        }
 
         $surveis->appends(['name' => $request->name]);
 

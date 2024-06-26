@@ -18,74 +18,94 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <a href="{{ route('users.index') }}">
-                        <div class="card card-statistic-1">
-                            <div class="card-icon bg-primary">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Users</h4>
+                @if (Auth::user()->role == 'Admin')
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a href="{{ route('users.index') }}">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-primary">
+                                    <i class="fas fa-users"></i>
                                 </div>
-                                <div class="card-body">
-                                    {{ $users->count() }}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <a href="{{ route('project.index') }}">
-                        <div class="card card-statistic-1">
-                            <div class="card-icon bg-success">
-                                <i class="fas  fa-list-check"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Projects</h4>
-                                </div>
-                                <div class="card-body">
-                                    {{ $projects->count() }}
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Total Users</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $users->count() }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <a href="{{ route('testimoni.index') }}">
-                        <div class="card card-statistic-1">
-                            <div class="card-icon bg-warning">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Testimonial</h4>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a href="{{ route('project.index') }}">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-success">
+                                    <i class="fas  fa-list-check"></i>
                                 </div>
-                                <div class="card-body">
-                                    {{ $testimonis->count() }}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <a href="{{ route('pemesanan.index') }}">
-                        <div class="card card-statistic-1">
-                            <div class="card-icon bg-danger">
-                                <i class="fas fa-clock-rotate-left"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>History</h4>
-                                </div>
-                                <div class="card-body">
-                                    {{ $pemesanans->count() }}
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Total Projects</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $projects->count() }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a href="{{ route('testimoni.index') }}">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-warning">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Total Testimonial</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $testimonis->count() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a href="{{ route('pemesanan.index') }}">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-danger">
+                                    <i class="fas fa-clock-rotate-left"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>History</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $pemesanans->count() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @else
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a href="{{ route('pemesanan.index') }}">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-danger">
+                                    <i class="fas fa-clock-rotate-left"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>History</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $pemesanans->count() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endif
             </div>
             {{-- <div class="row">
                 <div class="col-lg-8 col-md-12 col-12 col-sm-12">

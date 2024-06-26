@@ -15,9 +15,6 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        if (Auth::user()->role != 'Admin') {
-            return Redirect::back();
-        }
     }
 
 
@@ -29,7 +26,11 @@ class DashboardController extends Controller
         $users = User::all();
         $projects = Project::all();
         $testimonis = Testimoni::all();
-        $pemesanans = Pemesanan::all();
+        if (Auth::user()->role != 'User') {
+            $pemesanans = Pemesanan::all();
+        } else {
+            $pemesanans = Pemesanan::where('user_id', Auth::user()->id);
+        }
         $type_menu = 'Home';
         return view('pages.home.home-index', compact('type_menu', 'users', 'projects', 'testimonis', 'pemesanans'));
     }

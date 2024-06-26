@@ -27,24 +27,28 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="p-2">
-                                    <div class="float-left">
-                                        <div class="section-header-button">
-                                            <a href="{{ route('pemesanan.create') }}" class="btn btn-danger">Create New</a>
+                                @if (Auth::user()->role == 'Admin')
+                                    <div class="p-2">
+                                        <div class="float-left">
+                                            <div class="section-header-button">
+                                                <a href="{{ route('pemesanan.create') }}" class="btn btn-danger">Create
+                                                    New</a>
+                                            </div>
+                                        </div>
+                                        <div class="float-right">
+                                            <form action="" method="GET">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Search"
+                                                        name="name" value="{{ request('name') }}">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary"><i
+                                                                class="fas fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="float-right">
-                                        <form action="" method="GET">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search"
-                                                    name="name" value="{{ request('name') }}">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                @endif
                                 <div class="clearfix  divider mb-3"></div>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered table-lg">
@@ -58,10 +62,15 @@
                                             <th>Luas Bangunan</th>
                                             <th>Type</th>
                                             <th>Cost</th>
-                                            <th>Create At</th>
                                             <th>Status</th>
+                                            <th>Create At</th>
                                             {{-- <th>Created At</th> --}}
-                                            <th style="width: 5%" class="text-center">Action</th>
+                                            @if (Auth::user()->role == 'Admin')
+                                                <th style="width: 5%" class="text-center">Action</th>
+                                            @elseif(Auth::user()->role == 'User')
+                                                <th style="width: 5%" class="text-center">Action</th>
+                                            @else
+                                            @endif
                                         </tr>
                                         @foreach ($pemesanans as $index => $pemesanan)
                                             <tr>
@@ -108,17 +117,26 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('pemesanan.edit', $pemesanan) }}"
-                                                            class="btn btn-sm btn-icon btn-primary m-1"><i
-                                                                class="fas fa-eye"></i></a>
-                                                        <form action="{{ route('pemesanan.destroy', $pemesanan) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-sm btn-warning btn-icon m-1">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
+                                                        @if (Auth::user()->role == 'Admin')
+                                                            <a href="{{ route('pemesanan.edit', $pemesanan) }}"
+                                                                class="btn btn-sm btn-icon btn-primary m-1"><i
+                                                                    class="fas fa-eye"></i></a>
+                                                        @elseif(Auth::user()->role == 'User')
+                                                            <a href="{{ route('finishPemesanan.index', $pemesanan) }}"
+                                                                class="btn btn-sm btn-icon btn-primary m-1"><i
+                                                                    class="fas fa-eye"></i></a>
+                                                        @else
+                                                        @endif
+                                                        @if (Auth::user()->role == 'Admin')
+                                                            <form action="{{ route('pemesanan.destroy', $pemesanan) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-sm btn-warning btn-icon m-1">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

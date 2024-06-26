@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PemesananBerhasil;
+use App\Mail\SurveiBerhasil;
+use App\Models\AboutUs;
 use App\Models\Pemesanan;
 use App\Models\Project;
+use App\Models\Survei;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Expr\FuncCall;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BerandaController extends Controller
 {
@@ -70,6 +79,7 @@ class BerandaController extends Controller
 
         $pemesanan = Pemesanan::create([
             "name" => $request->name,
+            "user_id" => Auth::user()->id,
             "projectName" => $request->project,
             "email" => $request->email,
             "phone" => $request->phone,
@@ -104,6 +114,181 @@ class BerandaController extends Controller
             'paymentReceipt' => $path
         ]);
 
+        Alert::success('Success', 'Pemesanan Berhasil');
+        Mail::to($pemesanan->email)->send(new PemesananBerhasil($pemesanan));
+
         return Redirect::route('finishPemesanan.index', $pemesanan);
+    }
+
+    public function indexSurvei()
+    {
+        $datesDis = [];
+        $dates = Survei::get('surveiDate');
+        foreach ($dates as $date) {
+            $datesDis[] = $date->surveiDate;
+        }
+
+        $datesDisJson = json_encode($datesDis);
+
+        $type_menu = 'Survei';
+        $citys = [
+            [
+                'name' => 'Bandar Lampung',
+                'price' => 0
+            ],
+            [
+                'name' => 'Tarahan',
+                'price' => 400000
+            ],
+            [
+                'name' => 'Natar',
+                'price' => 300000
+            ],
+            [
+                'name' => 'Kota Bumi',
+                'price' => 900000
+            ],
+            [
+                'name' => 'Lampung Barat',
+                'price' => 1200000
+            ],
+            [
+                'name' => 'Tulang Bawang Barat',
+                'price' => 950000
+            ],
+            [
+                'name' => 'Pringsewu',
+                'price' => 500000
+            ],
+            [
+                'name' => 'Kota Agung',
+                'price' => 1000000
+            ],
+            [
+                'name' => 'Bandar Jaya',
+                'price' => 600000
+            ],
+            [
+                'name' => 'Trimurjo',
+                'price' => 500000
+            ],
+            [
+                'name' => 'Sidomulyo',
+                'price' => 600000
+            ],
+            [
+                'name' => 'Metro',
+                'price' => 550000
+            ],
+            [
+                'name' => 'Unit 2',
+                'price' => 950000
+            ],
+            [
+                'name' => 'Kalianda',
+                'price' => 650000
+            ],
+            [
+                'name' => 'BakauHeni',
+                'price' => 700000
+            ],
+            [
+                'name' => 'Way Kanan',
+                'price' => 1300000
+            ],
+            [
+                'name' => 'Palembang',
+                'price' => 1800000
+            ],
+        ];
+
+        return view('pages.beranda.survei-index', compact('type_menu', 'citys', 'datesDisJson'));
+    }
+
+    public function storeSurvei(Request $request)
+    {
+        $request->validate([
+            "name" => 'required',
+            "email" => 'required',
+            "phone" => 'required',
+            "city" => 'required',
+            "date" => 'required',
+            "time" => 'required',
+            "project" => 'required',
+            "type" => 'required',
+            "address" => 'required',
+        ]);
+
+        list($cost, $city) = explode('|', $request->city, 2);
+
+        $survei = Survei::create([
+            "name" => $request->name,
+            "user_id" => Auth::user()->id,
+            "projectName" => $request->project,
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "city" => $city,
+            "address" => $request->address,
+            "surveiDate" => $request->date,
+            "surveiTime" => $request->time,
+            "designType" => $request->type,
+            "cost" => $cost,
+            "status" => '',
+        ]);
+
+        if ($cost == 0) {
+            $status = 'Paid';
+            Alert::success('Success', 'Request Survei Berhasil');
+            Mail::to($request->email)->send(new SurveiBerhasil($survei));
+        } else {
+            $status = 'Unpaid';
+        }
+
+        $survei->update([
+            'status' => $status,
+        ]);
+
+        return Redirect::route('detailSurvei.index', $survei);
+    }
+
+    public function detailSurvei(Survei $survei)
+    {
+        $type_menu = 'Survei';
+        return view('pages.beranda.survei-detail', compact('type_menu', 'survei'));
+    }
+
+    public function detailSurveiUpdate(Request $request, Survei $survei)
+    {
+        $request->validate([
+            "file" => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
+
+        $files      = $request->file('file');
+        $path = uniqid() . '.' . $files->getClientOriginalExtension();
+        $files->move('img/payment/survei/', $path);
+
+        $survei->update([
+            'status' => 'Paid',
+            'paymentReceipt' => $path
+        ]);
+
+        Alert::success('Success', 'Request Survei Berhasil');
+        Mail::to($survei->email)->send(new SurveiBerhasil($survei));
+
+        return Redirect::route('detailSurvei.index', $survei);
+    }
+
+    public function aboutUsIndex()
+    {
+        $type_menu = 'About Us';
+        $aboutUs = AboutUs::get()->first();
+        $testimonis  = Testimoni::all();
+        return view('pages.beranda.aboutUs-index', compact('type_menu', 'testimonis', 'aboutUs'));
+    }
+
+    public function storeTestimoni(Request $request)
+    {
+        // dd($request->all());
+        Alert::success('Success', 'Terimakasih Sudah Menggunakan Jasa Kami ');
     }
 }

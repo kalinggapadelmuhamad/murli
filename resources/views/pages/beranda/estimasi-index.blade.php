@@ -76,7 +76,7 @@
                                                     <li>Design Exterior (FASAD)</li>
                                                     <li>Lay Out</li>
                                                     <li>
-                                                        <span class="badge text-bg-primary text-wrap">
+                                                        <span class="badge text-bg-dark text-wrap">
                                                             Design Interior
                                                         </span>
                                                     </li>
@@ -93,12 +93,12 @@
                                                     <li>Design Exterior (FASAD)</li>
                                                     <li>Lay Out</li>
                                                     <li>
-                                                        <span class="badge text-bg-primary text-wrap">
+                                                        <span class="badge text-bg-dark text-wrap">
                                                             Design Interior
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span class="badge text-bg-primary text-wrap">
+                                                        <span class="badge text-bg-dark text-wrap">
                                                             Rancangan Anggaran Biaya (RAB)
                                                         </span>
                                                     </li>
@@ -115,17 +115,17 @@
                                                     <li>Design Exterior (FASAD)</li>
                                                     <li>Lay Out</li>
                                                     <li>
-                                                        <span class="badge text-bg-primary text-wrap">
+                                                        <span class="badge text-bg-dark text-wrap">
                                                             Design Interior
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span class="badge text-bg-primary text-wrap">
+                                                        <span class="badge text-bg-dark text-wrap">
                                                             Rancangan Anggaran Biaya (RAB)
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span class="badge text-bg-primary text-wrap">
+                                                        <span class="badge text-bg-dark text-wrap">
                                                             Detail Engineering Design (DED)
                                                         </span>
                                                     </li>
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                         <div class="mt-3 d-flex justify-content-end">
-                            <button class="btn btn-md btn-primary">
+                            <button class="btn btn-md btn-outline-dark">
                                 Pesan Layanan
                             </button>
                         </div>

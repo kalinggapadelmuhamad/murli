@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class PemesananController extends Controller
@@ -14,9 +15,13 @@ class PemesananController extends Controller
     public function index(Request $request)
     {
         $type_menu  = 'History';
-        $pemesanans    = Pemesanan::when($request->name, function ($query, $name) {
-            $query->where('name', 'like', '%' . $name . '%');
-        })->latest()->paginate(10);
+        if (Auth::user()->role != 'User') {
+            $pemesanans    = Pemesanan::when($request->name, function ($query, $name) {
+                $query->where('name', 'like', '%' . $name . '%');
+            })->latest()->paginate(10);
+        } else {
+            $pemesanans    = Pemesanan::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        }
 
         $pemesanans->appends(['name' => $request->name]);
 

@@ -27,24 +27,30 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="p-2">
-                                    <div class="float-left">
-                                        <div class="section-header-button">
-                                            <a href="{{ route('survei.create') }}" class="btn btn-danger">Create New</a>
+                                @if (Auth::user()->role == 'Admin')
+                                    <div class="p-2">
+                                        <div class="float-left">
+                                            <div class="section-header-button">
+
+                                                <a href="{{ route('survei.create') }}" class="btn btn-danger">Create New</a>
+                                            </div>
+                                        </div>
+                                        <div class="float-right">
+                                            @if (Auth::user()->role != 'User')
+                                                <form action="" method="GET">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="Search"
+                                                            name="name" value="{{ request('name') }}">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-primary"><i
+                                                                    class="fas fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="float-right">
-                                        <form action="" method="GET">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search"
-                                                    name="name" value="{{ request('name') }}">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                @endif
                                 <div class="clearfix  divider mb-3"></div>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered table-lg">
@@ -61,7 +67,12 @@
                                             <th>Cost</th>
                                             <th>Status</th>
                                             {{-- <th>Created At</th> --}}
-                                            <th style="width: 5%" class="text-center">Action</th>
+                                            @if (Auth::user()->role == 'Admin')
+                                                <th style="width: 5%" class="text-center">Action</th>
+                                            @elseif(Auth::user()->role == 'User')
+                                                <th style="width: 5%" class="text-center">Action</th>
+                                            @else
+                                            @endif
                                         </tr>
                                         @foreach ($surveis as $index => $survei)
                                             <tr>
@@ -106,34 +117,28 @@
                                                         <div class="badge badge-danger">{{ $survei->status }}</div>
                                                     @endif
                                                 </td>
-                                                {{-- <td>
-                                                    {{ $survei->created_at->format('d-F-Y') }}
-                                                </td> --}}
-                                                {{-- <td>
-                                                    @php
-                                                        $panjangChar = strlen($project->description);
-                                                        if ($panjangChar > 20) {
-                                                            $name = substr($project->description, 0, 100);
-                                                            $name = $name . '...';
-                                                        } else {
-                                                            $name = $project->description;
-                                                        }
-                                                    @endphp
-                                                    {{ $name }}
-                                                </td> --}}
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('survei.edit', $survei) }}"
-                                                            class="btn btn-sm btn-icon btn-primary m-1"><i
-                                                                class="fas fa-eye"></i></a>
-                                                        <form action="{{ route('survei.destroy', $survei) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-sm btn-warning btn-icon m-1">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
+                                                        @if (Auth::user()->role == 'Admin')
+                                                            <a href="{{ route('survei.edit', $survei) }}"
+                                                                class="btn btn-sm btn-icon btn-primary m-1"><i
+                                                                    class="fas fa-eye"></i></a>
+                                                        @elseif(Auth::user()->role == 'User')
+                                                            <a href="{{ route('detailSurvei.index', $survei) }}"
+                                                                class="btn btn-sm btn-icon btn-primary m-1"><i
+                                                                    class="fas fa-eye"></i></a>
+                                                        @else
+                                                        @endif
+                                                        @if (Auth::user()->role == 'Admin')
+                                                            <form action="{{ route('survei.destroy', $survei) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-sm btn-warning btn-icon m-1">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

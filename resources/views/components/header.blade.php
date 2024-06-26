@@ -18,6 +18,9 @@
                 <a href="{{ route('profile.index') }}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
+                <a href="{{ route('beranda.index') }}" class="dropdown-item has-icon">
+                    <i class="fas fa-th"></i> Beranda
+                </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item has-icon text-danger"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit()">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class TestimoniController extends Controller
@@ -16,14 +17,19 @@ class TestimoniController extends Controller
     {
         $type_menu  = 'Testimoni';
         $keyword    = $request->name;
-        $testimonis = Testimoni::when($request->name, function ($query, $name) {
-            $query->whereHas('user', function ($query) use ($name) {
-                $query->where('name', 'like', '%' . $name . '%');
-            });
-        })->latest()->paginate('10');
+
+
+        if (Auth::user()->role != 'User') {
+            $testimonis = Testimoni::when($request->name, function ($query, $name) {
+                $query->whereHas('user', function ($query) use ($name) {
+                    $query->where('name', 'like', '%' . $name . '%');
+                });
+            })->latest()->paginate(10);
+        } else {
+            $testimonis = Testimoni::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        }
 
         $testimonis->appends(['name' => $keyword]);
-
         return view('pages.testimoni.testimoni-index', compact('type_menu', 'testimonis'));
     }
 

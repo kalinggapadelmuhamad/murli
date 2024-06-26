@@ -17,18 +17,23 @@ Route::get('our-project', [BerandaController::class, 'ourProject'])->name('ourPr
 Route::get('our-project/{project}', [BerandaController::class, 'ourProjectDetail'])->name('ourProjectDetail.index');
 Route::prefix('pricing')->group(function () {
     Route::get('estimasi-biaya', [BerandaController::class, 'estimasiBiaya'])->name('estimasiBiaya.index');
-    Route::get('pemesanan', [BerandaController::class, 'indexPemesanan'])->name('pemesanans.index');
-    Route::post('pemesanan/store', [BerandaController::class, 'storePemesanan'])->name('storePemesanan.index');
-    Route::get('pemesanan/detail/{pemesanan}', [BerandaController::class, 'finishPemesanan'])->name('finishPemesanan.index');
-    Route::put('pemesanan/detail/{pemesanan}', [BerandaController::class, 'finishPemesananStore'])->name('finishPemesananStore.index');
 });
 
-
-
-
-
+Route::get('/about', [BerandaController::class, 'aboutUsIndex'])->name('aboutUsIndex.index');
+Route::post('testimoni', [BerandaController::class, 'aboutUsIndex'])->name('storeTestimoni.index');
 
 Route::middleware('auth')->group(function () {
+    Route::prefix('pricing')->group(function () {
+        Route::get('pemesanan', [BerandaController::class, 'indexPemesanan'])->name('pemesanans.index');
+        Route::post('pemesanan/store', [BerandaController::class, 'storePemesanan'])->name('storePemesanan.index');
+        Route::get('pemesanan/detail/{pemesanan}', [BerandaController::class, 'finishPemesanan'])->name('finishPemesanan.index');
+        Route::put('pemesanan/detail/{pemesanan}', [BerandaController::class, 'finishPemesananStore'])->name('finishPemesananStore.index');
+
+        Route::get('survei', [BerandaController::class, 'indexSurvei'])->name('surveis.index');
+        Route::post('survei/store', [BerandaController::class, 'storeSurvei'])->name('storeSurvei.index');
+        Route::get('survei/detail/{survei}', [BerandaController::class, 'detailSurvei'])->name('detailSurvei.index');
+        Route::post('survei/detail/{survei}', [BerandaController::class, 'detailSurveiUpdate'])->name('detailSurveiUpdate.index');
+    });
     Route::resource('home', DashboardController::class);
     Route::resource('profile', ProfileController::class)->middleware('isAdmin');
     Route::resource('about-us', AboutUsController::class);

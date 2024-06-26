@@ -185,3 +185,102 @@ footer .list-group-item {
 footer .lisence {
     color: #FFF;
 }
+
+.heading {
+    font-weight: 600 !important;
+    font-size: 40px;
+}
+
+.core-value .card {
+    height: 100%;
+    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.core-value .layanan-icon i {
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: #ff5c97;
+    border-radius: 9999px;
+    padding: 0.1rem 0.6rem;
+}
+
+.core-value .proses-icon i {
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: #05e2ad;
+    border-radius: 9999px;
+    padding: 0.1rem 0.6rem;
+}
+
+.core-value .fasilitas-icon i {
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: #5ab8fd;
+    border-radius: 9999px;
+    padding: 0.1rem 0.6rem;
+}
+
+.core-value .nego-icon i {
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: #f8c749;
+    border-radius: 9999px;
+    padding: 0.1rem 0.6rem;
+
+}
+
+.core-value .text-card {
+    font-family: var(--heading-font);
+    color: var(--black-color);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 30px;
+    font-weight: 300;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+@media print {
+
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+}
