@@ -288,7 +288,18 @@ class BerandaController extends Controller
 
     public function storeTestimoni(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'desc' => 'required',
+            'rating' => 'required'
+        ]);
+
+        Testimoni::create([
+            'user_id' => Auth::user()->id,
+            'rating' => $request->rating,
+            'comment' => $request->desc,
+        ]);
+
         Alert::success('Success', 'Terimakasih Sudah Menggunakan Jasa Kami ');
+        return Redirect::back();
     }
 }

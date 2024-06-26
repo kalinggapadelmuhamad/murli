@@ -20,7 +20,6 @@ Route::prefix('pricing')->group(function () {
 });
 
 Route::get('/about', [BerandaController::class, 'aboutUsIndex'])->name('aboutUsIndex.index');
-Route::post('testimoni', [BerandaController::class, 'aboutUsIndex'])->name('storeTestimoni.index');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('pricing')->group(function () {
@@ -34,6 +33,9 @@ Route::middleware('auth')->group(function () {
         Route::get('survei/detail/{survei}', [BerandaController::class, 'detailSurvei'])->name('detailSurvei.index');
         Route::post('survei/detail/{survei}', [BerandaController::class, 'detailSurveiUpdate'])->name('detailSurveiUpdate.index');
     });
+
+    Route::post('storeTestimoni', [BerandaController::class, 'storeTestimoni'])->name('storeTestimoni');
+
     Route::resource('home', DashboardController::class);
     Route::resource('profile', ProfileController::class)->middleware('isAdmin');
     Route::resource('about-us', AboutUsController::class);

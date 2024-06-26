@@ -209,13 +209,9 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('aboutUsIndex.post') }}" method="POST">
+                                <form action="{{ route('storeTestimoni') }}" method="POST">
+                                    <div class="modal-body">
                                         @csrf
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Nama</label>
-                                            <input type="text" name="name" id="name" class="form-control">
-                                        </div>
                                         <div class="mb-3">
                                             <label for="desc" class="form-label">Deskripsi Penilaian</label>
                                             <textarea name="desc" id="desc" class="form-control"></textarea>
@@ -235,13 +231,13 @@
                                                 <label for="1">☆</label>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Understood</button>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark"
+                                            data-bs-dismiss="modal">Keluar</button>
+                                        <button type="submit" class="btn btn-outline-dark">Submit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
